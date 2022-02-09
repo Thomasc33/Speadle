@@ -5,8 +5,7 @@
 - To create the needed python virtual environment, open a console in the project directory and run: `python -m venv venv`
 
 - Once the virtual environment is set up, activate it by running one of the following commands:
-  * Linux/Ubuntu: `source venv/bin/activate`
+  * Linux/Ubuntu/macOS: `source venv/bin/activate`
   * Windows: `start venv\Scripts\activate` (cmd) or `venv\Scripts\activate` (powershell)
-  * MAC: `¯\_(ツ)_/¯`
 
 - Next, install the required python packages by running: `pip install -r requirements.txt`
