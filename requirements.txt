@@ -2,5 +2,6 @@ numpy
 pandas
 scipy
 tensorflow
+tensorflow_datasets
 opencv-python
 matplotlib
