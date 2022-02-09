@@ -4,10 +4,10 @@
 
 """
 
-from tokenize import Triple
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+from GoogleImageScrapper import GoogleImageScrapper
 
 def loadMNIST() -> dict:
     """
@@ -58,6 +58,25 @@ def loadMNIST() -> dict:
         "validation_images": validation_images,
         "validation_labels": validation_labels
     }
-    
 
-mnist = loadMNIST()
+def scrapeImages(nImages: int):
+    """
+    Scrape and save training/testing images from google images
+
+    Args:
+        nImages (int): Number of images of each mph value to scrape 
+        
+    NOTE: mph values are from 5-85
+    """
+    mph_range = np.arange(start=5, stop=90, step=5)
+
+    searches = [str(mph_range[i]) + "mph" for i in range(mph_range.shape[0])]
+    
+    for search in searches:
+        gis = GoogleImageScrapper.GoogleImageScraper("GoogleImageScrapper/webdriver/chromedriver", "data\\", 
+                                             search_key=search, number_of_images=nImages, headless=True)
+
+        urls = gis.find_image_urls()
+        gis.save_images(urls)
+
+
