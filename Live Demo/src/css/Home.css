@@ -1,0 +1,39 @@
+.Camera {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    top: 4vh;
+}
+
+.Camera * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.Camera label {
+    color: #fff;
+}
+
+.Camera p {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+}
+
+* {
+    text-decoration: none;
+}
+
+.predictionArea {
+    position: absolute;
+    background-color: #23272add;
+    left: 10%;
+    bottom: 5px;
+    width: 80%;
+    float: left;
+    border-radius: 5px;
+    overflow-y: scroll;
+}
+
+.predictionArea p {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+}
