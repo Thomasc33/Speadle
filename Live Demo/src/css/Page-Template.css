@@ -65,11 +65,11 @@
 }
 
 .Header a.active {
-  color: #a778ff;
+  color: #03cafc;
 }
 
 .Header a.active:after {
-  background: #a778ff;
+  background: #03cafc;
 }
 
 * {

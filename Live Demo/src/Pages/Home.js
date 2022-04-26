@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { isMobile } from "react-device-detect";
 import PageTemplate from './Template'
+import { CircularProgress } from '@mui/material';
 import Webcam from 'react-webcam'
 import axios from 'axios'
 import FormData from 'form-data'
@@ -30,7 +31,7 @@ function App() {
             //Post
             const response = await axios({
                 method: 'post',
-                url: 'https://a.vibot.com:5971/predict',
+                url: 'http://127.0.0.1:5971//predict',
                 mode: 'cors',
                 headers: {
                     'Access-Control-Allow-Origin': '*'
@@ -48,6 +49,8 @@ function App() {
         }
         callPost()
     }, [])
+
+
     return (
         <>
             <PageTemplate highLight="0" />
@@ -55,8 +58,8 @@ function App() {
                 <div>
                     <label>Choose a model: </label>
                     <select id='model'>
-                        <option value='kyle'>kyle</option>
-                        <option value='thomas'>thomas</option>
+                        <option value='cnn'>CNN</option>
+                        <option value='groupedcl'>Grouped Convolution Layers</option>
                     </select>
                 </div>
                 <Webcam
@@ -69,10 +72,10 @@ function App() {
             </div>
             {data ?
                 <div className='predictionArea'>
-                    {Object.keys(data.categories).map(cls => niceLabels(cls, data.categories[cls]))}
+                    <h1>{data.pred}</h1>
                 </div>
                 :
-                <p>Data will appear shorlty...</p>}
+                <CircularProgress />}
         </>
     )
 }

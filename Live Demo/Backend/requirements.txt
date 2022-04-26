@@ -1,0 +1,7 @@
+Flask
+flask_cors
+pathlib2
+tensorflow
+opencv-python
+numpy
+Pillow
