@@ -3,6 +3,8 @@
     left: 10%;
     width: 80%;
     top: 4vh;
+    max-height: 80vh;
+    max-width: 80vw;
 }
 
 .Camera * {
@@ -22,18 +24,20 @@
     text-decoration: none;
 }
 
-.predictionArea {
+.PredictionArea {
+    display: flex;
     position: absolute;
     background-color: #23272add;
-    left: 10%;
-    bottom: 5px;
-    width: 80%;
-    float: left;
-    border-radius: 5px;
+    left: 10vw;
+    bottom: 1rem;
+    width: 80vw;
+    border-radius: 1rem;
     overflow-y: scroll;
+    justify-content: center;
+    padding:1rem;
 }
 
-.predictionArea p {
+.PredictionArea * {
     font-family: 'Montserrat', sans-serif;
     color: #fff;
 }

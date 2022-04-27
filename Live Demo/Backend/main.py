@@ -7,6 +7,7 @@ import re
 import cv2
 import pathlib
 import numpy as np
+# from fastai.vision.all import PILImage
 from PIL import Image
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.PurePosixPath
@@ -16,7 +17,7 @@ CORS(app, resources={r"/predict": {"origins": "*"}})
 # Predict function for CNN Model
 
 
-def predict(model, inputs):
+def predict_cnn(model, inputs):
     # Cast data to numpy array's so tensorflow stops yelling at me
     inputs = np.array(inputs)
     predictions = []
@@ -45,25 +46,18 @@ learn_cnn = tf.keras.models.load_model('Models/CNN')
 
 def predict_single(img_file, learn, preprocessData=False):
     'function to take image and return prediction'
-    print(img_file)
-    print(Image.open(img_file))
-    #print(cv2.imdecode(img_file, cv2.IMREAD_UNCHANGED))
-    return {'pred': 'test'}
     if preprocessData:
-        image = np.array(cv2.imdecode(
-            img_file, cv2.IMREAD_UNCHANGED)).astype(np.float64)
-        shaped_image = cv2.resize(image, dsize=(
-            64, 64), interpolation=cv2.INTER_AREA)
+        image = np.asarray(Image.open(img_file))
+        shaped_image = np.array(cv2.resize(image, dsize=(64,64))).astype('float64')
         shaped_image /= 255.0  # Normalize image
         shaped_image = Filters.grayscale(shaped_image)
-
-        return {'pred': predict(learn, shaped_image)[0]}
+        return {'pred': predict_cnn(learn, shaped_image)[0]}
     else:
-        image = np.array(cv2.imdecode(img_file, cv2.IMREAD_UNCHANGED))
-        shaped_image = cv2.resize(image, dsize=(
-            224, 224), interpolation=cv2.INTER_AREA)
-
-        return {'pred': learn.predict(shaped_image)}
+        labels = [25, 30, 35, 40, 45, 50, 60]
+        image = np.asarray(Image.open(img_file))
+        shaped_image = np.array(cv2.resize(image, dsize=(224,224)))
+        shaped_image = np.reshape(shaped_image, [-1, 224, 224, 3])
+        return {'pred': labels[np.argmax(learn.predict(shaped_image))]}
 
 
 # route for prediction
@@ -84,4 +78,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5971, debug=True)
+    app.run(host='0.0.0.0', port=5972, debug=False)
