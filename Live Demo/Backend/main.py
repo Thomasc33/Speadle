@@ -17,14 +17,14 @@ CORS(app, resources={r"/predict": {"origins": "*"}})
 # Predict function for CNN Model
 
 
-def predict_cnn(model, inputs):
+def predict_cnn(m, inputs):
     # Cast data to numpy array's so tensorflow stops yelling at me
     inputs = np.array(inputs)
     predictions = []
     labels = [25, 30, 35, 40, 45, 50]
 
     # Predict
-    outputs = model.predict(Preprocess.reshape_data(inputs))
+    outputs = m.predict(Preprocess.reshape_data(inputs))
 
     # Iterate through outputs
     for output in outputs:
@@ -78,4 +78,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5972, debug=False)
+    app.run(host='0.0.0.0', port=5972, debug=True, ssl_context=('C:\\Certbot\\live\\a.vibot.tech\\cert.pem', 'C:\\Certbot\\live\\a.vibot.tech\\privkey.pem'))
